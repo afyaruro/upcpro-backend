@@ -1,0 +1,17 @@
+/home/afyaruro/Proyecto de Grado/UpcPro/Core.Repository/bin/Debug/net8.0/Core.Repository.deps.json
+/home/afyaruro/Proyecto de Grado/UpcPro/Core.Repository/bin/Debug/net8.0/Core.Repository.dll
+/home/afyaruro/Proyecto de Grado/UpcPro/Core.Repository/bin/Debug/net8.0/Core.Repository.pdb
+/home/afyaruro/Proyecto de Grado/UpcPro/Core.Repository/bin/Debug/net8.0/Core.Domain.dll
+/home/afyaruro/Proyecto de Grado/UpcPro/Core.Repository/bin/Debug/net8.0/Core.Domain.pdb
+/home/afyaruro/Proyecto de Grado/UpcPro/Core.Repository/obj/Debug/net8.0/Core.Repository.csproj.AssemblyReference.cache
+/home/afyaruro/Proyecto de Grado/UpcPro/Core.Repository/obj/Debug/net8.0/Core.Repository.GeneratedMSBuildEditorConfig.editorconfig
+/home/afyaruro/Proyecto de Grado/UpcPro/Core.Repository/obj/Debug/net8.0/Core.Repository.AssemblyInfoInputs.cache
+/home/afyaruro/Proyecto de Grado/UpcPro/Core.Repository/obj/Debug/net8.0/Core.Repository.AssemblyInfo.cs
+/home/afyaruro/Proyecto de Grado/UpcPro/Core.Repository/obj/Debug/net8.0/Core.Repository.csproj.CoreCompileInputs.cache
+/home/afyaruro/Proyecto de Grado/UpcPro/Core.Repository/obj/Debug/net8.0/Core.Repository.csproj.CopyComplete
+/home/afyaruro/Proyecto de Grado/UpcPro/Core.Repository/obj/Debug/net8.0/Core.Repository.dll
+/home/afyaruro/Proyecto de Grado/UpcPro/Core.Repository/obj/Debug/net8.0/refint/Core.Repository.dll
+/home/afyaruro/Proyecto de Grado/UpcPro/Core.Repository/obj/Debug/net8.0/Core.Repository.pdb
+/home/afyaruro/Proyecto de Grado/UpcPro/Core.Repository/obj/Debug/net8.0/ref/Core.Repository.dll
+/home/afyaruro/Proyecto de Grado/UpcPro/Core.Repository/bin/Debug/net8.0/Infrastructure.dll
+/home/afyaruro/Proyecto de Grado/UpcPro/Core.Repository/bin/Debug/net8.0/Infrastructure.pdb

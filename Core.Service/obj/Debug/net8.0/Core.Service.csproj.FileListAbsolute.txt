@@ -1,0 +1,15 @@
+/home/afyaruro/Proyecto de Grado/UpcPro/Core.Service/bin/Debug/net8.0/Core.Service.deps.json
+/home/afyaruro/Proyecto de Grado/UpcPro/Core.Service/bin/Debug/net8.0/Core.Service.dll
+/home/afyaruro/Proyecto de Grado/UpcPro/Core.Service/bin/Debug/net8.0/Core.Service.pdb
+/home/afyaruro/Proyecto de Grado/UpcPro/Core.Service/bin/Debug/net8.0/Core.Domain.dll
+/home/afyaruro/Proyecto de Grado/UpcPro/Core.Service/bin/Debug/net8.0/Core.Domain.pdb
+/home/afyaruro/Proyecto de Grado/UpcPro/Core.Service/obj/Debug/net8.0/Core.Service.csproj.AssemblyReference.cache
+/home/afyaruro/Proyecto de Grado/UpcPro/Core.Service/obj/Debug/net8.0/Core.Service.GeneratedMSBuildEditorConfig.editorconfig
+/home/afyaruro/Proyecto de Grado/UpcPro/Core.Service/obj/Debug/net8.0/Core.Service.AssemblyInfoInputs.cache
+/home/afyaruro/Proyecto de Grado/UpcPro/Core.Service/obj/Debug/net8.0/Core.Service.AssemblyInfo.cs
+/home/afyaruro/Proyecto de Grado/UpcPro/Core.Service/obj/Debug/net8.0/Core.Service.csproj.CoreCompileInputs.cache
+/home/afyaruro/Proyecto de Grado/UpcPro/Core.Service/obj/Debug/net8.0/Core.Service.csproj.CopyComplete
+/home/afyaruro/Proyecto de Grado/UpcPro/Core.Service/obj/Debug/net8.0/Core.Service.dll
+/home/afyaruro/Proyecto de Grado/UpcPro/Core.Service/obj/Debug/net8.0/refint/Core.Service.dll
+/home/afyaruro/Proyecto de Grado/UpcPro/Core.Service/obj/Debug/net8.0/Core.Service.pdb
+/home/afyaruro/Proyecto de Grado/UpcPro/Core.Service/obj/Debug/net8.0/ref/Core.Service.dll

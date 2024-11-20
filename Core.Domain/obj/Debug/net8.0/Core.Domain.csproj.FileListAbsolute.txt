@@ -1,0 +1,11 @@
+/home/afyaruro/Proyecto de Grado/UpcPro/Core.Domain/bin/Debug/net8.0/Core.Domain.deps.json
+/home/afyaruro/Proyecto de Grado/UpcPro/Core.Domain/bin/Debug/net8.0/Core.Domain.dll
+/home/afyaruro/Proyecto de Grado/UpcPro/Core.Domain/bin/Debug/net8.0/Core.Domain.pdb
+/home/afyaruro/Proyecto de Grado/UpcPro/Core.Domain/obj/Debug/net8.0/Core.Domain.GeneratedMSBuildEditorConfig.editorconfig
+/home/afyaruro/Proyecto de Grado/UpcPro/Core.Domain/obj/Debug/net8.0/Core.Domain.AssemblyInfoInputs.cache
+/home/afyaruro/Proyecto de Grado/UpcPro/Core.Domain/obj/Debug/net8.0/Core.Domain.AssemblyInfo.cs
+/home/afyaruro/Proyecto de Grado/UpcPro/Core.Domain/obj/Debug/net8.0/Core.Domain.csproj.CoreCompileInputs.cache
+/home/afyaruro/Proyecto de Grado/UpcPro/Core.Domain/obj/Debug/net8.0/Core.Domain.dll
+/home/afyaruro/Proyecto de Grado/UpcPro/Core.Domain/obj/Debug/net8.0/refint/Core.Domain.dll
+/home/afyaruro/Proyecto de Grado/UpcPro/Core.Domain/obj/Debug/net8.0/Core.Domain.pdb
+/home/afyaruro/Proyecto de Grado/UpcPro/Core.Domain/obj/Debug/net8.0/ref/Core.Domain.dll
