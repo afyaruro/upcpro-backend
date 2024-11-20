@@ -8,7 +8,7 @@ namespace Core.Domain.Entities
 {
     public class PreguntaBasicaEntity : BaseEntity
     {
-        public int id_pregunta { get; set; }
+        public PreguntaEntity preguntaEntity { get; set; }
         public string encabezado { get; set; }
         public string imagenEncabezado { get; set; }
         public string opcionA { get; set; }

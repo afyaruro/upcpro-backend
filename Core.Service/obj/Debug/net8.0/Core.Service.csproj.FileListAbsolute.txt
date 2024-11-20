@@ -13,3 +13,4 @@
 /home/afyaruro/Proyecto de Grado/UpcPro/Core.Service/obj/Debug/net8.0/refint/Core.Service.dll
 /home/afyaruro/Proyecto de Grado/UpcPro/Core.Service/obj/Debug/net8.0/Core.Service.pdb
 /home/afyaruro/Proyecto de Grado/UpcPro/Core.Service/obj/Debug/net8.0/ref/Core.Service.dll
+/home/afyaruro/Proyecto de Grado/UpcPro/Core.Service/obj/Debug/net8.0/Core.Service.sourcelink.json

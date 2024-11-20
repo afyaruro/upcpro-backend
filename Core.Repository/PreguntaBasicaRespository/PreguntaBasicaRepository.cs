@@ -17,12 +17,8 @@ namespace Core.Repository.PreguntaBasicaRespository
         {
             _context = context;
         }
+        
         public Task<PreguntaBasicaResponse> ConsultaPreguntaBasica(int idPregunta)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<bool> DeletePreguntaBasica(int idPregunta)
         {
             throw new NotImplementedException();
         }
@@ -32,12 +28,17 @@ namespace Core.Repository.PreguntaBasicaRespository
             return NewPreguntaBasicaRepository.NewPreguntaBasica(pregunta, _context);
         }
 
-        public Task<List<PreguntaBasicaResponse>> ObtenerTodasPreguntaBasica(int idPregunta)
+        public Task<PreguntaBasicaResponse> ObtenerTodasPreguntaBasica()
         {
             throw new NotImplementedException();
         }
 
-        public Task<bool> UpdatePreguntaBasica(PreguntaBasicaEntity pregunta)
+        Task<PreguntaBasicaResponse> IPreguntaBasicaRepository.DeletePreguntaBasica(int idPregunta)
+        {
+            throw new NotImplementedException();
+        }
+
+        Task<PreguntaBasicaResponse> IPreguntaBasicaRepository.UpdatePreguntaBasica(PreguntaBasicaEntity pregunta)
         {
             throw new NotImplementedException();
         }

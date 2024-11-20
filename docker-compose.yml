@@ -1,0 +1,45 @@
+version: '3.8'
+
+services:
+  webapi:
+    build:
+      context: .  # Ruta del Dockerfile
+      dockerfile: Dockerfile
+    ports:
+      - "8081:8081"  # Expone el puerto de la API
+    depends_on:
+      - db  # Asegura que la base de datos esté lista antes de iniciar la aplicación
+    networks:
+      - upcpro-network
+
+  db:
+    image: mysql:8.0  # Usa la imagen oficial de MySQL
+    environment:
+      MYSQL_ROOT_PASSWORD: 12345  # Contraseña del root
+      MYSQL_DATABASE: saberpro  # Base de datos inicial
+    ports:
+      - "3307:3306"  # Expone MySQL en el puerto 3307
+    volumes:
+      - db-data:/var/lib/mysql  # Persiste los datos de la base de datos
+    networks:
+      - upcpro-network
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin  # Usa la imagen oficial de phpMyAdmin
+    environment:
+      - PMA_HOST=db  # Configura phpMyAdmin para conectarse al contenedor db
+      - PMA_PORT=3306  # El puerto por defecto de MySQL
+      - MYSQL_ROOT_PASSWORD=12345  # Contraseña de root para phpMyAdmin
+    ports:
+      - "8082:80"  # Expone phpMyAdmin en el puerto 8082
+    depends_on:
+      - db  # Asegura que phpMyAdmin se inicie después de la base de datos
+    networks:
+      - upcpro-network
+
+volumes:
+  db-data:  # Define un volumen persistente para los datos de MySQL
+
+networks:
+  upcpro-network:
+    driver: bridge  # Crea una red para que los contenedores se comuniquen entre sí

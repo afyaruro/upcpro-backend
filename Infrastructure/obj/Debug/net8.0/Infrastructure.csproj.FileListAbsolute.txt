@@ -13,3 +13,4 @@
 /home/afyaruro/Proyecto de Grado/UpcPro/Infrastructure/bin/Debug/net8.0/Core.Domain.dll
 /home/afyaruro/Proyecto de Grado/UpcPro/Infrastructure/bin/Debug/net8.0/Core.Domain.pdb
 /home/afyaruro/Proyecto de Grado/UpcPro/Infrastructure/obj/Debug/net8.0/Infrastructure.csproj.CopyComplete
+/home/afyaruro/Proyecto de Grado/UpcPro/Infrastructure/obj/Debug/net8.0/Infrastructure.sourcelink.json

@@ -15,3 +15,4 @@
 /home/afyaruro/Proyecto de Grado/UpcPro/Core.Repository/obj/Debug/net8.0/ref/Core.Repository.dll
 /home/afyaruro/Proyecto de Grado/UpcPro/Core.Repository/bin/Debug/net8.0/Infrastructure.dll
 /home/afyaruro/Proyecto de Grado/UpcPro/Core.Repository/bin/Debug/net8.0/Infrastructure.pdb
+/home/afyaruro/Proyecto de Grado/UpcPro/Core.Repository/obj/Debug/net8.0/Core.Repository.sourcelink.json

@@ -12,6 +12,5 @@ namespace Core.Domain.Entities
         public int tipoCompetencia { get; set; }  //competencias ciudadanas, raconamiento cuantitativo...  no comunicacion escrita mas adelante con ia
         public int complejidad { get; set; }  //1 =baja, 2 = media, 3 = alta
         public int tipoPregunta { get; set; }  //texto - texto, imagen - texto, texto -imagen, imagen - imagen. el de complete y relacione para el demo no
-        public int numero_preguntas { get; set; }
     }
 }
