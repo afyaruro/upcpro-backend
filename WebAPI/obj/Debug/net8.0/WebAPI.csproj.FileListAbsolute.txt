@@ -65,3 +65,4 @@
 /home/afyaruro/Proyecto de Grado/UpcPro/WebAPI/bin/Debug/net8.0/Microsoft.AspNetCore.Authentication.JwtBearer.dll
 /home/afyaruro/Proyecto de Grado/UpcPro/WebAPI/bin/Debug/net8.0/Microsoft.IdentityModel.Protocols.dll
 /home/afyaruro/Proyecto de Grado/UpcPro/WebAPI/bin/Debug/net8.0/Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+/home/afyaruro/Proyecto de Grado/UpcPro/WebAPI/obj/Debug/net8.0/WebAPI.sourcelink.json

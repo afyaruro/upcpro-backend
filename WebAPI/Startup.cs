@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using Core.Domain.Interfaces;
 using Core.Repository.EstudianteRepository;
 using Core.Repository.FacultadRepository;
+using Core.Repository.PreguntaBasicaRespository;
+using Core.Repository.PreguntaRepository;
 using Core.Repository.ProgramasRepository;
 using Core.Repository.Repository;
 using Core.Service.jwtService;
@@ -35,6 +37,7 @@ namespace WebAPI
 
             var dbConfig = new ConfigConnection
             {
+                // Server = "db",
                 Server = "localhost",
                 Database = "saberpro",
                 User = "root",
@@ -78,6 +81,8 @@ namespace WebAPI
             services.AddTransient<IEstudianteRepository, EstudianteRepository>();
             services.AddTransient<IFacultadRepository, FacultadRepository>();
             services.AddTransient<IProgramaRepository, ProgramaRepository>();
+            services.AddTransient<IPreguntaBasicaRepository, PreguntaBasicaRepository>();
+            services.AddTransient<IPreguntaRepository, PreguntaRepository>();
 
 
             services.AddScoped<IJwtService, JwtService>();

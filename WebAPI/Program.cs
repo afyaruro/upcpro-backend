@@ -13,6 +13,11 @@ builder.Services.AddCors(options =>
         });
 });
 
+builder.WebHost.ConfigureKestrel(options =>
+{
+    options.ListenAnyIP(8081); 
+});
+
 
 
 var Startup = new Startup(builder.Configuration);
