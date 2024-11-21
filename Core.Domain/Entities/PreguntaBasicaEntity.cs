@@ -10,6 +10,7 @@ namespace Core.Domain.Entities
     {
         public PreguntaEntity preguntaEntity { get; set; }
         public string encabezado { get; set; }
+        public string question { get; set; }
         public string imagenEncabezado { get; set; }
         public string opcionA { get; set; }
         public string opcionB { get; set; }

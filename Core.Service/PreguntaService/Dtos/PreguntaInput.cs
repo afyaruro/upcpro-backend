@@ -11,6 +11,8 @@ namespace Core.Service.PreguntaService.Dtos
         public int tipoPregunta { get; set; } 
         public int complejidad { get; set; } 
         public string encabezado { get; set; }
+        public string question { get; set; }
+
         public string imagenEncabezado { get; set; }
         public string opcionA { get; set; }
         public string opcionB { get; set; }

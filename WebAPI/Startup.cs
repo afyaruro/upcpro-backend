@@ -37,8 +37,8 @@ namespace WebAPI
 
             var dbConfig = new ConfigConnection
             {
-                // Server = "db",
-                Server = "localhost",
+                Server = "db",
+                // Server = "localhost",
                 Database = "saberpro",
                 User = "root",
                 Password = "12345"

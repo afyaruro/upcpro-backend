@@ -19,6 +19,7 @@ namespace Core.Service.PreguntaService.Mapping
 
             pregunta.imagenEncabezado = preguntaInput.imagenEncabezado;
             pregunta.encabezado = preguntaInput.encabezado;
+            pregunta.question = preguntaInput.question;
             pregunta.opcionA = preguntaInput.opcionA;
             pregunta.opcionB = preguntaInput.opcionB;
             pregunta.opcionC = preguntaInput.opcionC;

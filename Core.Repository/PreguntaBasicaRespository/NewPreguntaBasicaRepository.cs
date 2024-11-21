@@ -13,7 +13,7 @@ namespace Core.Repository.PreguntaBasicaRespository
     {
         public static async Task<PreguntaBasicaResponse> NewPreguntaBasica(PreguntaBasicaEntity pregunta, MysqlContext context)
         {
-             var query = "INSERT INTO pregunta_basica (	Id_pregunta, encabezado, imagenEncabezado, opcionA, opcionB, opcionC, opcionD, opcionCorrecta, retroalimentacion) VALUES (@Id_pregunta, @encabezado, @imagenEncabezado, @opcionA, @opcionB, @opcionC, @opcionD, @opcionCorrecta, @retroalimentacion)";
+             var query = "INSERT INTO pregunta_basica (	Id_pregunta, encabezado, question, imagenEncabezado, opcionA, opcionB, opcionC, opcionD, opcionCorrecta, retroalimentacion) VALUES (@Id_pregunta, @encabezado, @question, @imagenEncabezado, @opcionA, @opcionB, @opcionC, @opcionD, @opcionCorrecta, @retroalimentacion)";
 
             try
             {
@@ -23,6 +23,7 @@ namespace Core.Repository.PreguntaBasicaRespository
                 {
                     command.Parameters.AddWithValue("@Id_pregunta", pregunta.preguntaEntity.Id);
                     command.Parameters.AddWithValue("@encabezado", pregunta.encabezado);
+                    command.Parameters.AddWithValue("@question", pregunta.question);
                     command.Parameters.AddWithValue("@imagenEncabezado", pregunta.imagenEncabezado);
                     command.Parameters.AddWithValue("@opcionA", pregunta.opcionA);
                     command.Parameters.AddWithValue("@opcionB", pregunta.opcionB);
