@@ -27,7 +27,7 @@ namespace Core.Repository.EstudianteRepository
 
                         estudiante.user.Id = userResponse2.user!.Id;
 
-                        var query = "INSERT INTO estudiantes (userId, nombres, apellidos, tipoIdentificacion, numeroIdentificacion, genero, fechaNacimiento, facultad, programa, nivelActual, puntaje) VALUES (@userId, @nombres, @apellidos, @tipoIdentificacion, @numeroIdentificacion, @genero, @fechaNacimiento, @facultad, @programa, @nivelActual, @puntaje)";
+                        var query = "INSERT INTO estudiantes (userId, nombres, apellidos, tipoIdentificacion, numeroIdentificacion, genero, fechaNacimiento, programa) VALUES (@userId, @nombres, @apellidos, @tipoIdentificacion, @numeroIdentificacion, @genero, @fechaNacimiento, @programa)";
 
                         _context.OpenConnection();
 

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:upcpro_app/Ui/sign1.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -124,7 +125,11 @@ class _LoginState extends State<Login> {
                       ),
                       TextButton(
                         onPressed: () {
-                          // Navegar a la pantalla de registro
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const Sign1()),
+                          );
                         },
                         child: const Text(
                           "Regístrate",
