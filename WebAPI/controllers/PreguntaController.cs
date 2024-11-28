@@ -13,7 +13,7 @@ namespace WebAPI.controllers
     [Route("api/[controller]")]
     public class PreguntaController : ControllerBase
     {
-         private readonly PreguntaService _service;
+        private readonly PreguntaService _service;
 
 
         public PreguntaController(IPreguntaBasicaRepository repositoryPreguntaBasica, IPreguntaRepository repositoryPregunta)
@@ -29,6 +29,24 @@ namespace WebAPI.controllers
             if (resp.IsError == false)
             {
                 return Ok(new { success = true, message = resp.message });
+            }
+            else if (resp.IsError == true)
+            {
+                return StatusCode(resp.StatusCode, new { success = false, message = resp.message });
+            }
+
+            return StatusCode(500, new { success = false, message = "Error: " + resp.message });
+
+        }
+
+        [HttpGet("consultarPreguntas")]
+        public async Task<IActionResult> consultarPreguntas()
+        {
+            PreguntaBasicaResponse resp = await _service.todasPreguntas();
+
+            if (resp.IsError == false)
+            {
+                return Ok(new { success = true, message = resp.message, data = resp.preguntasBasicas });
             }
             else if (resp.IsError == true)
             {
