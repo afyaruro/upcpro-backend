@@ -13,12 +13,23 @@ namespace Core.Domain.Interfaces
         public string message { get; set; }
         public PreguntaBasicaEntity preguntaBasica { get; set; }
 
+        public List<PreguntaBasicaEntity> preguntasBasicas { get; set; }
+
+
 
         public PreguntaBasicaResponse(PreguntaBasicaEntity preguntaBasicaEntity, string message)
         {
             this.IsError = false;
             this.message = message;
             this.preguntaBasica = preguntaBasicaEntity;
+            this.StatusCode = 200;
+        }
+
+        public PreguntaBasicaResponse(List<PreguntaBasicaEntity> preguntasBasicas, string message)
+        {
+            this.IsError = false;
+            this.message = message;
+            this.preguntasBasicas = preguntasBasicas;
             this.StatusCode = 200;
         }
 

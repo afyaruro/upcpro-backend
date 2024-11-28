@@ -12,9 +12,9 @@ namespace Core.Repository.PreguntaRepository
 {
     public static class ConsultarPreguntas
     {
-          public static async Task<PreguntaResponse> ObtenerTodasPregunta(MysqlContext _context)
+        public static async Task<PreguntaResponse> ObtenerTodasPregunta(MysqlContext _context)
         {
-             List<PreguntaEntity> preguntas = new List<PreguntaEntity>();
+            List<PreguntaEntity> preguntas = new List<PreguntaEntity>();
 
             try
             {
@@ -57,5 +57,55 @@ namespace Core.Repository.PreguntaRepository
                 _context.CloseConnection();
             }
         }
+
+
+
+        public static async Task<PreguntaResponse> ObtenerPreguntaPorId(MysqlContext _context, int id)
+        {
+            try
+            {
+                var query = "SELECT * FROM preguntas WHERE ID = @Id";
+                PreguntaEntity pregunta = null;
+
+                _context.OpenConnection();
+
+                using (var command = new MySqlCommand(query, _context.Connection))
+                {
+                    command.Parameters.AddWithValue("@Id", id);
+
+                    using (var reader = await command.ExecuteReaderAsync())
+                    {
+                        if (await reader.ReadAsync())
+                        {
+                            pregunta = new PreguntaEntity
+                            {
+                                Id = reader.GetInt32("ID"),
+                                complejidad = reader.GetInt32("complejidad"),
+                                tipoCompetencia = reader.GetInt32("tipoCompetencia"),
+                                tipoPregunta = reader.GetInt32("tipoPregunta")
+                            };
+                        }
+                    }
+                }
+
+                if (pregunta != null)
+                {
+                    return new PreguntaResponse(new List<PreguntaEntity> { pregunta }, "Pregunta encontrada exitosamente");
+                }
+                else
+                {
+                    return new PreguntaResponse("No se encontró ninguna pregunta con el ID proporcionado", true, 404);
+                }
+            }
+            catch (Exception e)
+            {
+                return new PreguntaResponse("Error: " + e.Message, true, 500);
+            }
+            finally
+            {
+                _context.CloseConnection();
+            }
+        }
+
     }
 }

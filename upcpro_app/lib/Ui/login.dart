@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:upcpro_app/Ui/home.dart';
+import 'package:upcpro_app/Ui/menu.dart';
 import 'package:upcpro_app/Ui/sign1.dart';
 
 class Login extends StatefulWidget {
@@ -91,7 +93,12 @@ class _LoginState extends State<Login> {
                     width: double.infinity,
                     child: ElevatedButton(
                       onPressed: () {
-                        // Lógica de inicio de sesión
+                        Navigator.pushAndRemoveUntil(
+                          context,
+                          MaterialPageRoute(builder: (context) => const BottomMenu()),
+                          (Route<dynamic> route) =>
+                              false, 
+                        );
                       },
                       style: ElevatedButton.styleFrom(
                         padding: const EdgeInsets.symmetric(vertical: 16.0),

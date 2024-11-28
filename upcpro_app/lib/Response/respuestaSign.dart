@@ -24,7 +24,7 @@ class RespuestaSign {
     } else if (!emailRegex.hasMatch(correo)) {
       mostrarAlertaError(context, "Por favor, ingresa un correo válido.");
       return;
-    } else if (!correo.endsWith('@UNICESAR.EDU.CO')) {
+    } else if (!correo.endsWith('@unicesar.edu.co')) {
       mostrarAlertaError(
           context, "El correo debe tener el dominio @unicesar.edu.co");
       return;
