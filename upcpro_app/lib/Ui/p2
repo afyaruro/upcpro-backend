@@ -1,0 +1,316 @@
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:upcpro_app/Components/header.dart';
+import 'package:upcpro_app/Controller/controllerNiveles.dart';
+import 'package:upcpro_app/Models/nivel.dart';
+import 'package:upcpro_app/Models/pregunta.dart';
+
+class Home extends StatefulWidget {
+  const Home({super.key});
+
+  @override
+  State<Home> createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
+
+  String? competencia; // Competencia inicializada como null
+  IconData? icon; // Ícono inicializado como null
+
+  // Lista de competencias disponibles
+  final List<Map<String, dynamic>> competencias = [
+    {"nombre": "Razonamiento Cuantitativo", "icono": Icons.calculate},
+    {"nombre": "Inglés", "icono": Icons.translate},
+    {"nombre": "Lectura Crítica", "icono": Icons.book},
+    {"nombre": "Competencias Ciudadanas", "icono": Icons.people},
+  ];
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance
+        .addPostFrameCallback((_) => _mostrarSeleccionCompetencia());
+  }
+
+  // Mostrar Bottom Sheet para seleccionar competencia
+  void _mostrarSeleccionCompetencia() async {
+    await showModalBottomSheet(
+      context: context,
+      isDismissible: false, // Obliga al usuario a seleccionar
+      enableDrag: false, // Desactiva el deslizamiento para cerrar
+      builder: (BuildContext context) {
+        return Container(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const Text(
+                "Selecciona tu competencia",
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              ),
+              const SizedBox(height: 16),
+              ListView.builder(
+                shrinkWrap: true,
+                itemCount: competencias.length,
+                itemBuilder: (context, index) {
+                  return ListTile(
+                    leading: Icon(
+                      competencias[index]['icono'],
+                      color: Color.fromARGB(255, 0, 0, 0),
+                    ),
+                    title: Text(competencias[index]['nombre']),
+                    onTap: () {
+                      setState(() {
+                        competencia = competencias[index]['nombre'];
+                        icon = competencias[index]['icono'];
+                      });
+                      Navigator.of(context).pop(); // Cierra el Bottom Sheet
+                    },
+                  );
+                },
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  // Callback para actualizar la competencia seleccionada
+  void actualizarCompetencia(String nuevaCompetencia, IconData nuevoIcono) {
+
+    setState(() {
+      competencia = nuevaCompetencia;
+      icon = nuevoIcono;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    // Lista de niveles generada dinámicamente
+    // List<Nivel> niveles = [];
+    final ControllerNiveles controllerNiv = Get.find();
+    final niveles = <Nivel>[
+    Nivel(
+        competencia: 1,
+        nivel: 1,
+        preguntas: [
+          Pregunta(
+              encabezado: "",
+              question: "What is a citizen's responsibility?",
+              imagenEncabezado: "",
+              opcionA: "Vote",
+              opcionB: "Sleep",
+              opcionC: "Eat",
+              opcionD: "Play",
+              opcionCorrecta: 1,
+              retroalimentacion: "Correct! Voting is a responsibility.",
+              tipoCompetencia: 3,
+              complejidad: 1,
+              tipoPregunta: 1,
+              id: 4)
+        ],
+        dificultad: 1,
+        id: 4),
+        
+    Nivel(
+        competencia: 2,
+        nivel: 1,
+        preguntas: [
+          Pregunta(
+              encabezado: "",
+              question: "What is a citizen's responsibility?",
+              imagenEncabezado: "",
+              opcionA: "Vote",
+              opcionB: "Sleep",
+              opcionC: "Eat",
+              opcionD: "Play",
+              opcionCorrecta: 1,
+              retroalimentacion: "Correct! Voting is a responsibility.",
+              tipoCompetencia: 3,
+              complejidad: 1,
+              tipoPregunta: 1,
+              id: 4)
+        ],
+        dificultad: 1,
+        id: 4),
+  ];
+
+  @override
+  void initState() {
+    super.initState();
+    niveles.addAll(controllerNiv.niveles ?? []);
+  }
+
+    // Widget de un nodo de nivel
+    Widget nodoNivel(Nivel nivel, int index) {
+      double left = 0;
+      double right = 0;
+      double top = 0;
+
+      const double patternHeight = 510;
+      int cycle = index ~/ 9;
+      int positionInCycle = index % 9;
+      double verticalOffset = cycle * patternHeight;
+
+      switch (positionInCycle) {
+        case 0:
+          left = 0;
+          top = 20;
+          break;
+        case 1:
+          left = 160;
+          top = 60;
+          break;
+        case 2:
+          left = 240;
+          top = 150;
+          break;
+        case 3:
+          left = 230;
+          top = 240;
+          break;
+        case 4:
+          left = 80;
+          top = 280;
+          break;
+        case 5:
+          right = 80;
+          top = 270;
+          break;
+        case 6:
+          right = 220;
+          top = 330;
+          break;
+        case 7:
+          right = 200;
+          top = 400;
+          break;
+        case 8:
+          right = 100;
+          top = 470;
+          break;
+        default:
+          break;
+      }
+
+      top += verticalOffset;
+
+      return Positioned(
+        left: left,
+        top: top,
+        right: right,
+        child: btnNivel(
+          nivel: nivel,
+        ),
+      );
+    }
+
+    const double patternHeight = 510;
+    int totalCycles = (niveles.length / 9).ceil();
+    double totalHeight = totalCycles * patternHeight;
+
+    return Scaffold(
+      body: Stack(
+        children: [
+          // Imagen de fondo
+          Positioned.fill(
+            child: Image.asset(
+              'assets/fondo.jpg',
+              fit: BoxFit.cover,
+            ),
+          ),
+          Column(
+            children: [
+              // Header solo se muestra si hay valores seleccionados
+              if (competencia != null && icon != null)
+                HeaderHome(
+                  competencia: competencia!,
+                  icon: icon!,
+                  actualizarCompetencia: actualizarCompetencia,
+                ),
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Container(
+                    height: totalHeight,
+                    child: Stack(
+                      children: [
+                        for (int i = 0; i < niveles.length; i++)
+                          nodoNivel(niveles[i], i),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class btnNivel extends StatelessWidget {
+  final Nivel nivel;
+
+  const btnNivel({
+    super.key,
+    required this.nivel,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        SizedBox(
+          height: 80,
+          width: 80,
+          child: Stack(
+            children: [
+              Positioned(
+                top: 5,
+                child: Container(
+                  width: 70,
+                  height: 60,
+                  decoration: BoxDecoration(
+                      color: const Color.fromARGB(255, 61, 143, 7),
+                      borderRadius: BorderRadius.circular(40)),
+                ),
+              ),
+              Container(
+                width: 70,
+                height: 60,
+                decoration: BoxDecoration(
+                    color: const Color.fromARGB(255, 149, 202, 26),
+                    borderRadius: BorderRadius.circular(40)),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      "${nivel.nivel}",
+                      style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 15,
+                          fontWeight: FontWeight.w600),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: List.generate(
+                        nivel.dificultad,
+                        (index) => const Icon(
+                          Icons.star_rate_rounded,
+                          size: 15,
+                          color: Color.fromARGB(255, 253, 220, 71),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+}

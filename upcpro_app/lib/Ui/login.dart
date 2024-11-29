@@ -1,5 +1,6 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:upcpro_app/Ui/home.dart';
+import 'package:http/http.dart' as http;
 import 'package:upcpro_app/Ui/menu.dart';
 import 'package:upcpro_app/Ui/sign1.dart';
 
@@ -11,6 +12,61 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+
+  Future<void> login() async {
+    final String correo = emailController.text.trim();
+    final String password = passwordController.text.trim();
+
+    if (correo.isEmpty || password.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Por favor ingresa tus credenciales')),
+      );
+      return;
+    }
+
+    final url = Uri.parse('http://157.173.113.225:8081/api/User/loginMovil');
+
+    try {
+      final response = await http.post(
+        url,
+        headers: {'Content-Type': 'application/json'},
+        body: jsonEncode({
+          "correo": correo,
+          "password": password,
+        }),
+      );
+
+      if (response.statusCode == 200) {
+        final data = jsonDecode(response.body);
+
+        if (data["token"] != null) {
+          // Navega a la pantalla principal
+          Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(builder: (context) => const BottomMenu()),
+            (Route<dynamic> route) => false,
+          );
+        } else {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('Inicio de sesión fallido')),
+          );
+        }
+      } else {
+        final errorMessage =
+            jsonDecode(response.body)['message'] ?? 'Error desconocido';
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Inicio de sesión fallido')),
+        );
+      }
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Error al conectar con el servidor: $e')),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,7 +88,6 @@ class _LoginState extends State<Login> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  // Icono o logo superior
                   Image.asset(
                     "assets/image.png",
                     width: 120,
@@ -40,7 +95,6 @@ class _LoginState extends State<Login> {
                     fit: BoxFit.cover,
                   ),
                   const SizedBox(height: 20),
-                  // Título
                   const Text(
                     "Bienvenido",
                     style: TextStyle(
@@ -59,14 +113,14 @@ class _LoginState extends State<Login> {
                     textAlign: TextAlign.center,
                   ),
                   const SizedBox(height: 40),
-                  // Campo de correo electrónico
                   _buildTextField(
+                    controller: emailController,
                     hintText: "Correo electrónico",
                     icon: Icons.email_outlined,
                   ),
                   const SizedBox(height: 20),
-                  // Campo de contraseña
                   _buildTextField(
+                    controller: passwordController,
                     hintText: "Contraseña",
                     icon: Icons.lock_outline,
                     isPassword: true,
@@ -88,18 +142,10 @@ class _LoginState extends State<Login> {
                     ),
                   ),
                   const SizedBox(height: 30),
-                  // Botón de inicio de sesión
                   SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(
-                      onPressed: () {
-                        Navigator.pushAndRemoveUntil(
-                          context,
-                          MaterialPageRoute(builder: (context) => const BottomMenu()),
-                          (Route<dynamic> route) =>
-                              false, 
-                        );
-                      },
+                      onPressed: login,
                       style: ElevatedButton.styleFrom(
                         padding: const EdgeInsets.symmetric(vertical: 16.0),
                         backgroundColor: Colors.white,
@@ -121,8 +167,6 @@ class _LoginState extends State<Login> {
                   const SizedBox(height: 20),
                   const Divider(color: Colors.white70),
                   const SizedBox(height: 20),
-
-                  const SizedBox(height: 30),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -158,11 +202,13 @@ class _LoginState extends State<Login> {
   }
 
   Widget _buildTextField({
+    required TextEditingController controller,
     required String hintText,
     required IconData icon,
     bool isPassword = false,
   }) {
     return TextField(
+      controller: controller,
       obscureText: isPassword,
       style: const TextStyle(color: Colors.white),
       decoration: InputDecoration(

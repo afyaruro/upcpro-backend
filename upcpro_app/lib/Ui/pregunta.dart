@@ -1,21 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:upcpro_app/Models/pregunta.dart';
+import 'package:upcpro_app/Ui/menu.dart';
+import 'package:upcpro_app/Ui/resultado.dart';
 
 class PreguntaBasica extends StatefulWidget {
-  const PreguntaBasica({super.key});
+  final List<Pregunta> preguntas;
+  final int index;
+  final int preguntasCorrectas;
+  const PreguntaBasica(
+      {super.key,
+      required this.preguntas,
+      required this.index,
+      this.preguntasCorrectas = 0});
 
   @override
   State<PreguntaBasica> createState() => _PreguntaBasicaState();
 }
 
 class _PreguntaBasicaState extends State<PreguntaBasica> {
-  final List<String> options = [
-    'Flutter es un framework de Google',
-    'Flutter es un lenguaje de programación',
-    'Flutter solo funciona con Android',
-    'Flutter es una librería para JavaScript',
-  ];
-
-  int? selectedOption; // Opción seleccionada
+  int? selectedOption;
+  bool comprobar = false;
 
   void selectOption(int index) {
     setState(() {
@@ -25,6 +29,14 @@ class _PreguntaBasicaState extends State<PreguntaBasica> {
 
   @override
   Widget build(BuildContext context) {
+    final pregunta = widget.preguntas[widget.index];
+    final List<String> options = [
+      pregunta.opcionA,
+      pregunta.opcionB,
+      pregunta.opcionC,
+      pregunta.opcionD
+    ];
+
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 245, 252, 245),
       body: Container(
@@ -59,7 +71,12 @@ class _PreguntaBasicaState extends State<PreguntaBasica> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     IconButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => BottomMenu()));
+                      },
                       icon: Icon(
                         Icons.close,
                         color: Color.fromARGB(255, 192, 192, 192),
@@ -84,7 +101,15 @@ class _PreguntaBasicaState extends State<PreguntaBasica> {
                       child: Align(
                         alignment: Alignment.centerLeft,
                         child: Container(
-                          width: 100,
+                          width: widget.index == 0
+                              ? MediaQuery.of(context).size.width * 0.5 * 0.3
+                              : widget.index == 1
+                                  ? MediaQuery.of(context).size.width *
+                                      0.5 *
+                                      0.6
+                                  : MediaQuery.of(context).size.width *
+                                      0.5 *
+                                      0.9,
                           height: 15,
                           decoration: BoxDecoration(
                             color: Color.fromARGB(255, 151, 57, 180),
@@ -108,7 +133,7 @@ class _PreguntaBasicaState extends State<PreguntaBasica> {
                 child: Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
-                    '¿Qué es Flutter?',
+                    pregunta.question,
                     style: TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
@@ -119,78 +144,110 @@ class _PreguntaBasicaState extends State<PreguntaBasica> {
               ),
 
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: Expanded(
-                  child: Column(
-                    children: [
-                      for (var i = 0; i < options.length; i++)
-                        GestureDetector(
-                          onTap: () => selectOption(i),
-                          child: AnimatedContainer(
-                            duration: const Duration(milliseconds: 300),
-                            margin: const EdgeInsets.symmetric(vertical: 8.0),
-                            padding: const EdgeInsets.all(16.0),
-                            decoration: BoxDecoration(
+                padding: EdgeInsets.symmetric(horizontal: 20),
+                child: Column(
+                  children: [
+                    for (var i = 0; i < options.length; i++)
+                      GestureDetector(
+                        onTap: selectedOption == null || !comprobar
+                            ? () => selectOption(i)
+                            : null, // Bloquea la acción si las condiciones no se cumplen
+                        child: AnimatedContainer(
+                          duration: const Duration(milliseconds: 300),
+                          margin: const EdgeInsets.symmetric(vertical: 8.0),
+                          padding: const EdgeInsets.all(16.0),
+                          decoration: BoxDecoration(
+                            color: selectedOption == i
+                                ? Color.fromARGB(87, 188, 93, 218)
+                                : Colors.white,
+                            borderRadius: BorderRadius.circular(12.0),
+                            border: Border.all(
                               color: selectedOption == i
-                                  ? const Color.fromARGB(255, 203, 231, 190)
-                                  : Colors.white,
-                              borderRadius: BorderRadius.circular(12.0),
-                              border: Border.all(
-                                color: selectedOption == i
-                                    ? const Color(0xff689734)
-                                    : Colors.grey[300]!,
-                                width: 2,
+                                  ? Color.fromARGB(255, 151, 57, 180)
+                                  : Colors.grey[300]!,
+                              width: 2,
+                            ),
+                            boxShadow: selectedOption == i
+                                ? [
+                                    BoxShadow(
+                                      color: Color.fromARGB(255, 151, 57, 180)
+                                          .withOpacity(0.3),
+                                      blurRadius: 10,
+                                      spreadRadius: 2,
+                                      offset: const Offset(0, 4),
+                                    )
+                                  ]
+                                : [],
+                          ),
+                          child: Row(
+                            children: [
+                              CircleAvatar(
+                                backgroundColor: selectedOption == i
+                                    ? Color.fromARGB(255, 151, 57, 180)
+                                    : Colors.grey[300],
+                                child: Text(
+                                  String.fromCharCode(65 + i), // A, B, C, D
+                                  style: const TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
                               ),
-                              boxShadow: selectedOption == i
-                                  ? [
-                                      BoxShadow(
-                                        color: const Color(0xff689734)
-                                            .withOpacity(0.3),
-                                        blurRadius: 10,
-                                        spreadRadius: 2,
-                                        offset: const Offset(0, 4),
-                                      )
-                                    ]
-                                  : [],
-                            ),
-                            child: Row(
-                              children: [
-                                CircleAvatar(
-                                  backgroundColor: selectedOption == i
-                                      ? const Color(0xff689734)
-                                      : Colors.grey[300],
-                                  child: Text(
-                                    String.fromCharCode(65 + i), // A, B, C, D
-                                    style: const TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold,
-                                    ),
+                              const SizedBox(width: 16),
+                              Expanded(
+                                child: Text(
+                                  options[i],
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w500,
+                                    color: selectedOption == i
+                                        ? Color.fromARGB(255, 151, 57, 180)
+                                        : Colors.black87,
                                   ),
                                 ),
-                                const SizedBox(width: 16),
-                                Expanded(
-                                  child: Text(
-                                    options[i],
-                                    style: TextStyle(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.w500,
-                                      color: selectedOption == i
-                                          ? const Color(0xff689734)
-                                          : Colors.black87,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
+                              ),
+                            ],
                           ),
                         ),
-                    ],
-                  ),
+                      ),
+                  ],
                 ),
               ),
 
               SizedBox(
-                height: 120,
+                height: 20,
+              ),
+
+              Visibility(
+                visible: comprobar, // Controlar visibilidad con la variable
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: Center(
+                      child: Text(
+                    selectedOption == null
+                        ? "Selecciona una opción"
+                        : comprobar
+                            ? selectedOption != null &&
+                                    selectedOption ==
+                                        pregunta.opcionCorrecta - 1
+                                ? "¡Correcto! ${pregunta.retroalimentacion}"
+                                : "¡Incorrecta! ${pregunta.retroalimentacion}"
+                            : "",
+                    style: TextStyle(
+                        color: selectedOption != null &&
+                                selectedOption == pregunta.opcionCorrecta - 1
+                            ? Colors.green
+                            : Colors.red,
+                        fontWeight: FontWeight.w500),
+                    textAlign: TextAlign.center,
+                  )),
+                ),
+                // replacement: const Text(
+                //     "El widget está oculto"), // Mostrar otro widget si está oculto
+              ),
+
+              SizedBox(
+                height: 10,
               ),
 
               Padding(
@@ -198,19 +255,65 @@ class _PreguntaBasicaState extends State<PreguntaBasica> {
                 child: SizedBox(
                   width: double.infinity,
                   child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      if (selectedOption == null && comprobar) {
+                        return;
+                      }
+
+                      if (!comprobar) {
+                        comprobar = true;
+
+                        setState(() {});
+                        return;
+                      }
+
+                      int IsCorrecta =
+                          selectedOption == pregunta.opcionCorrecta - 1 ? 1 : 0;
+
+                      int correctas = widget.preguntasCorrectas + IsCorrecta;
+
+                      widget.preguntas.length - 1 == widget.index
+                          ? Navigator.pushAndRemoveUntil(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => Resultado(
+                                        correctas: correctas,
+                                        incorrectas:
+                                            widget.preguntas.length - correctas,
+                                      )),
+                              (Route<dynamic> route) => false,
+                            )
+                          : Navigator.pushAndRemoveUntil(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => PreguntaBasica(
+                                        preguntas: widget.preguntas,
+                                        index: widget.index + 1,
+                                        preguntasCorrectas: correctas,
+                                      )),
+                              (Route<dynamic> route) => false,
+                            );
+                    },
                     style: ElevatedButton.styleFrom(
                       padding: const EdgeInsets.symmetric(
                         vertical: 15,
                       ),
-                      backgroundColor: const Color(0xff689734),
+                      backgroundColor: !comprobar
+                          ? Colors.blue
+                          : comprobar && selectedOption == null
+                              ? Colors.blue
+                              : const Color(0xff689734),
                       disabledBackgroundColor: Colors.grey[400],
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(12),
                       ),
                     ),
-                    child: const Text(
-                      "Siguiente",
+                    child: Text(
+                      !comprobar
+                          ? "Comprobar"
+                          : comprobar && selectedOption == null
+                              ? "Comprobar"
+                              : "Siguiente",
                       style: TextStyle(
                         fontSize: 15,
                         fontWeight: FontWeight.bold,

@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
+import 'package:upcpro_app/Models/pregunta.dart';
+import 'package:upcpro_app/Service/obtenerPreguntas.dart';
 import 'package:upcpro_app/Ui/login.dart';
+import 'package:upcpro_app/Ui/menu.dart';
 
 class Splash extends StatefulWidget {
   const Splash({super.key});
@@ -11,6 +15,9 @@ class Splash extends StatefulWidget {
 class _SplashState extends State<Splash> with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation _fadeAnimation;
+  // Box? competencia_seleccionadaBox;
+  // Box? nivel_actual;
+
 
   @override
   void initState() {
@@ -28,12 +35,32 @@ class _SplashState extends State<Splash> with SingleTickerProviderStateMixin {
     _controller.repeat(reverse: true);
 
     Future.delayed(const Duration(seconds: 4), () {
+      // preguntas();
+      // competencia_seleccionadaBox = Hive.box('competencia-seleccionada');
+      // nivel_actual = Hive.box('nivel-actua');
       Navigator.pushReplacement(
         context,
-        _createFadeTransition(const Login()), 
+        _createFadeTransition(const Login()),
+        // _createFadeTransition(const BottomMenu()),
+
+
       );
     });
   }
+
+  // preguntas() async {
+  //   try {
+  //     PreguntaService preguntaService = PreguntaService();
+
+  //     List<Pregunta> preguntas = await preguntaService.fetchPreguntas();
+  //     for (var pregunta in preguntas) {
+  //       print(
+  //           "Pregunta ID: ${pregunta.id}, Encabezado: ${pregunta.encabezado}");
+  //     }
+  //   } catch (e) {
+  //     print("Error: $e");
+  //   }
+  // }
 
   @override
   void dispose() {
@@ -45,11 +72,11 @@ class _SplashState extends State<Splash> with SingleTickerProviderStateMixin {
     return PageRouteBuilder(
       pageBuilder: (context, animation, secondaryAnimation) => page,
       transitionsBuilder: (context, animation, secondaryAnimation, child) {
-
-        var begin = Offset(0.0, 1.0); 
-        var end = Offset.zero; 
+        var begin = Offset(0.0, 1.0);
+        var end = Offset.zero;
         var curve = Curves.easeInOut;
-        var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+        var tween =
+            Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
         var offsetAnimation = animation.drive(tween);
 
         return FadeTransition(
@@ -72,8 +99,8 @@ class _SplashState extends State<Splash> with SingleTickerProviderStateMixin {
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
             colors: [
-              Color.fromARGB(255, 181, 190, 169), 
-              Color.fromARGB(255, 133, 167, 137), 
+              Color.fromARGB(255, 181, 190, 169),
+              Color.fromARGB(255, 133, 167, 137),
             ],
           ),
         ),

@@ -1,7 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:upcpro_app/Controller/controllerNiveles.dart';
 import 'package:upcpro_app/Ui/splash.dart';
 
-void main() {
+void main() async {
+  
+  await Hive.initFlutter();
+  // await Hive.openBox('preguntas');
+  // await Hive.openBox('competencia-seleccionada');
+  // await Hive.openBox('nivel-actual');
+  // await Hive.openBox('puntajes');
+  // await Hive.openBox('usuario');
+
+
+  Get.put(ControllerNiveles());
+  
   runApp(
     const MyApp(),
   );

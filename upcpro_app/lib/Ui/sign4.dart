@@ -1,12 +1,14 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
+import 'package:upcpro_app/Alerts/alertCargando.dart';
 import 'package:upcpro_app/Alerts/alertError.dart';
 import 'package:upcpro_app/Alerts/alertSuccess.dart';
 import 'package:upcpro_app/Components/customProgresoSign.dart';
 import 'package:upcpro_app/Components/textField.dart';
 import 'package:upcpro_app/Models/usuario.dart';
 import 'package:upcpro_app/Response/respuestaSign.dart';
+import 'package:upcpro_app/Ui/menu.dart';
 import 'package:upcpro_app/Utils/styles.dart';
 
 class Sign4 extends StatefulWidget {
@@ -133,8 +135,9 @@ class _Sign4State extends State<Sign4> {
 
                     //aca crear la cuenta
 
-                    crearCuenta(context);
+                    mostrarAlertaCargando(context, "Creando Cuenta...");
 
+                    crearCuenta(context);
                   },
                   style: ElevatedButton.styleFrom(
                     padding: const EdgeInsets.symmetric(vertical: 16.0),
@@ -162,7 +165,8 @@ class _Sign4State extends State<Sign4> {
   }
 
   Future<void> crearCuenta(BuildContext context) async {
-    final url = Uri.parse('http://157.173.113.225:8081/api/Estudiante/crearCuenta');
+    final url =
+        Uri.parse('http://157.173.113.225:8081/api/Estudiante/crearCuenta');
     final body = {
       "emailUser": widget.user.emailUser,
       "passwordUser": controllerPass.text,
@@ -173,7 +177,7 @@ class _Sign4State extends State<Sign4> {
       "tipoIdentificacion": widget.user.tipoIdentificacion,
       "numeroIdentificacion": widget.user.numeroIdentificacion,
       "sexo": widget.user.sexo,
-      "fechaNacimiento": "2024-11-21T15:14:40.360Z",
+      "fechaNacimiento": widget.user.fechaNacimiento.toIso8601String(),
       "programa": widget.user.programa
     };
 
@@ -184,12 +188,23 @@ class _Sign4State extends State<Sign4> {
         body: jsonEncode(body),
       );
 
+      final Map<String, dynamic> decodedResponse = json.decode(response.body);
+
       if (response.statusCode == 200) {
-        mostrarAlertaSucces(context, "Succes: ${response.body}", (){});
+        Navigator.of(context).pop();
+        mostrarAlertaSucces(context, "${decodedResponse['message']}", () {
+          Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(builder: (context) => const BottomMenu()),
+            (Route<dynamic> route) => false,
+          );
+        });
       } else {
-        mostrarAlertaError(context, "Error: ${response.body}");
+        Navigator.of(context).pop();
+        mostrarAlertaError(context, "${decodedResponse['message']}");
       }
     } catch (e) {
+      Navigator.of(context).pop();
       mostrarAlertaError(context, "Error de red: $e");
     }
   }
